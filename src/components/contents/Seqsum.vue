@@ -9,8 +9,8 @@
 	</div>
 </template>
 <script>
-import Nav from "@/components/Nav.vue"
-import Footer from "@/components/Footer.vue"
+import Nav from "@/components/cmm/Nav.vue"
+import Footer from "@/components/cmm/Footer.vue"
 export default {
 	name:'seqsum',
 	components:{
@@ -31,7 +31,7 @@ export default {
 /* 			let _first = parseInt(this.fisrt)
 			let _second = parseInt(this.second)
 			let arr = [_first,_second] */
-			let arr = [Number(this.fisrt),Number(this.second)]
+			// let arr = [Number(this.fisrt),Number(this.second)]
 			/* if(_first<_second){
 				start = _first
 				end = _second
@@ -39,15 +39,31 @@ export default {
 				start = _second
 				end = _first
 			} */
-			arr.sort()
-			let sum = 0
+		/* 	arr.sort()
+			let sum = 0 */
 			/* for(let i=start;i<end+1;i++){
 				sum += i
 			} */
-			for(let i=arr[0];i<arr[1]+1;i++){
+	/* 		for(let i=arr[0];i<arr[1]+1;i++){
 				sum += i
 			}
-			this.sumvalue= sum
+			this.sumvalue= sum */
+			
+
+			let a = parseInt(this.first)
+			let b = parseInt(this.second)
+			alert(`a의 타입 ${typeof a} b의 타입 ${typeof b}`)
+			const arr = [a, b]
+			arr.sort(function(a, b){
+				return a - b
+			})
+			let sum = 0
+			let start = arr[0]
+			let end = arr[1]+1
+			for(let i=start; i< end; i++){
+				sum += i
+			}
+			this.sumvalue = sum
 		}
 	}
 }

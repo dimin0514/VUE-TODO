@@ -7,21 +7,21 @@
         <span class="addbutton" @click="addTodo">추 가</span>
     </div>
     <ul id="todolist">
-		<li v-for="(v , i) of todos" :key="v.id" :class="v.clazz" @click="doneToggle(v.id)"  >
+		<li v-for="(v , i) of todos" :key="v.id" :class="v.clazz" @click="doneToggle(v)"  >
             <span>{{i+1}}. </span>
 			<span>{{v.todo}}</span>
             <span v-if="v.done" >(완료)</span>
-			<span class="done">&#x00D7;</span>
+			<span @click="deleteTodo(i)" class="done" style="float:right">&#x00D7;</span>
         </li>
     </ul>
 	<Footer></Footer>
 </div>
 </template>
 <script>
-import Nav from "@/components/Nav.vue"
-import Footer from "@/components/Footer.vue"
+import Nav from "@/components/cmm/Nav.vue"
+import Footer from "@/components/cmm/Footer.vue"
 export default {
-	name:'todo',
+	name:'todo2',
 	components:{
 		Nav,Footer
 	},
@@ -40,17 +40,16 @@ export default {
 		addTodo(){
 			this.todos.push({id: this.todos.length+1, todo: this.task, done:false, clazz: ''})
 		},
-		doneToggle(index){
-	/* 		const index = this.todos.findIndex(function(item){
-				return item.id === id
-			})
-			const target = this.todos[index-1]
-			target.done =!this.todos[index].done
-			target.clazz =(this.todos[index].done)?'checked':'' */
-			this.todos[index-1].done = !this.todos[index-1].done
-			this.todos[index-1].clazz = (this.todos[index-1].done)? 'checked': ''
+		doneToggle(json){
+            if(json.clazz==''){
+                json.clazz='checked'
+            }else{
+                json.clazz=''
+            }
 		},
-		deleteTodo(){
+		deleteTodo(index){
+            
+            this.todos.splice(index, 1)
 
 		}
 
